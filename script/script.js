@@ -1,12 +1,3 @@
-// function getElement(id) {
-//   const count = document.getElementsByClassName(id);
-//   return count;
-// }
-
-// document.getElementById("call-button").addEventListener("click", function () {
-//   alert(" 📞 National Emergency Number 999");
-// });
-
 let count = 0;
 const display = document.getElementById("count");
 
@@ -21,16 +12,6 @@ for (let btn of heartButton) {
   btn.onclick = heartClick;
 }
 
-// btn.addEventListener("click", function () {
-//   count++;
-//   display.innerText = count;
-// });
-
-// document
-//   .getElementsByClassName("call-button")
-//   .addEventListener("click", function () {
-//     alert("📞 National Emergency Number 999");
-//   });
 const coinsSpan = document.getElementById("coin");
 let coins = parseInt(coinsSpan.innerText);
 
@@ -51,30 +32,12 @@ for (const button of callButton) {
     coins = coins - 20;
     coinsSpan.textContent = coins;
 
-    // const callHistory = document.getElementById("cart-container");
-
-    // const newCart = document.createElement("div");
-    // newCart.innerHTML = `
-    // <div class="flex justify-between items-center p-3 bg-slate-50">
-    //       <div>
-    //         <h2 class="font-bold">National Emergency Number</h2>
-    //         <p class="font-bold">999</p>
-    //       </div>
-    //       <p class="font-bold">Time</p>
-    //     </div>
-
-    // `;
-
-    // callHistory.append(newCart);
-
-    // Current time
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, "0");
     const minutes = String(now.getMinutes()).padStart(2, "0");
     const seconds = String(now.getSeconds()).padStart(2, "0");
     const time = hours + ":" + minutes + ":" + seconds;
 
-    // Create Call History entry
     const cart = document.getElementById("cart-Container");
     const newCart = document.createElement("div");
     newCart.innerHTML = `
@@ -83,7 +46,7 @@ for (const button of callButton) {
           <h2 class="font-bold">${title}</h2>
           <p class="font-bold">${number}</p>
         </div>
-        <p class="font-bold">${time}</p>
+        <p class="font-semibold">${time}</p>
       </div>
     `;
     cart.appendChild(newCart);
@@ -92,5 +55,21 @@ for (const button of callButton) {
     clearHistoryBtn.addEventListener("click", function () {
       newCart.innerHTML = "";
     });
+  });
+}
+
+let copyCount = 0;
+const copyCountDisplaye = document.getElementById("copy-count");
+const copyButton = document.querySelectorAll(".copy-btn");
+
+for (const copy of copyButton) {
+  copy.addEventListener("click", function () {
+    const copyNumber =
+      this.parentElement.parentElement.querySelector(".card-number").innerText;
+    navigator.clipboard.writeText(copyNumber).then(() => {
+      alert(" number copied " + copyNumber);
+    });
+    copyCount++;
+    copyCountDisplaye.innerText = copyCount;
   });
 }
